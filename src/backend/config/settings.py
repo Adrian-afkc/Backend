@@ -36,6 +36,14 @@ def obtenerConfiguracionBaseDatos() -> dict:
     }
 
 
+def obtenerConfiguracionJwt() -> dict:
+    return {
+        'secreto': os.getenv('JWT_SECRETO', 'cambia-esta-clave-en-produccion'),
+        'algoritmo': os.getenv('JWT_ALGORITMO', 'HS256'),
+        'minutosExpiracion': int(os.getenv('JWT_MINUTOS_EXPIRACION', '120')),
+    }
+
+
 def obtenerCadenaConexion() -> str:
     config = obtenerConfiguracionBaseDatos()
 

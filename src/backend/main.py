@@ -3,6 +3,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from .apis.auth_api import rutaAuth
 from .apis.categoria_api import rutaCategoria
 from .apis.health_api import rutaHealth
 from .apis.insumo_api import rutaInsumo
@@ -46,6 +47,7 @@ def manejarErrorPyodbc(peticion: Request, error: pyodbc.Error):
         content={'detail': 'Error al comunicarse con la base de datos', 'detalle': str(error)},
     )
 
+app.include_router(rutaAuth, prefix='/api')
 app.include_router(rutaInsumo, prefix='/api')
 app.include_router(rutaCategoria, prefix='/api')
 app.include_router(rutaUnidadMedida, prefix='/api')
